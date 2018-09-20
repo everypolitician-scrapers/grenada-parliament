@@ -1,17 +1,15 @@
 #!/bin/env ruby
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'scraperwiki'
 require 'nokogiri'
-require 'open-uri'
-require 'colorize'
-
 require 'pry'
+require 'scraperwiki'
+
 require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
 def noko_for(url)
-  Nokogiri::HTML(open(url).read) 
+  Nokogiri::HTML(open(url).read)
 end
 
 def scrape_list(url)
@@ -22,7 +20,7 @@ def scrape_list(url)
 
     prefix, name = tds[1].text.strip.split('Hon.')
 
-    data = { 
+    data = {
       name: name.strip,
       honorifix_prefix: prefix.strip,
       constituency: tds[0].text.strip,
@@ -32,7 +30,7 @@ def scrape_list(url)
       term: '2013',
       source: url,
     }
-    ScraperWiki.save_sqlite([:name, :term], data)
+    ScraperWiki.save_sqlite(%i[name term], data)
   end
 end
 
