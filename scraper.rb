@@ -30,6 +30,7 @@ def scrape_list(url)
       term: '2013',
       source: url,
     }
+    puts data.reject { |_, v| v.to_s.empty? }.sort_by { |k, _| k }.to_h if ENV['MORPH_DEBUG']
     ScraperWiki.save_sqlite(%i[name term], data)
   end
 end
