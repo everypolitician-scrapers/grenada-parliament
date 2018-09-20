@@ -35,4 +35,4 @@ def scrape_list(url)
   end
 end
 
-scrape_list('http://www.gov.gd/contact_mp.html')
+scrape_list('https://www.gov.gd/contact_mp.html')
